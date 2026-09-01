@@ -1,112 +1,114 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report
 
-import ... #e.g. pandas, sklearn, .....
-import warnings # DO NOT modify this line
-from sklearn.exceptions import ConvergenceWarning # DO NOT modify this line
-warnings.filterwarnings("ignore", category=ConvergenceWarning) # DO NOT modify this line
+DROP_COLS = [
+    'id', 'gill-attachment', 'gill-spacing', 'gill-size', 'gill-color-rate',
+    'stalk-root', 'stalk-surface-above-ring', 'stalk-surface-below-ring',
+    'stalk-color-above-ring-rate', 'stalk-color-below-ring-rate',
+    'veil-color-rate', 'veil-type',
+]
 
 
-class BankLogistic:
-    def __init__(self, data_path): # DO NOT modify this line
+class MushroomClassifier:
+    def __init__(self, data_path):
         self.data_path = data_path
-        self.df = pd.read_csv(data_path, sep=',')
-        self.X_train = None
-        self.y_train = None
-        self.X_test = None
-        self.y_test = None
+        self.df = pd.read_csv(data_path)
 
-    def Q1(self): # DO NOT modify this line
-        """
-        Problem 1:
-            Load ‘bank-st.csv’ data from the “Attachment”
-            How many rows of data are there in total?
+    def _prepared_df(self):
+        df = self.df.dropna(subset=['label'])
+        return df.drop(columns=DROP_COLS)
 
-        """
-        # TODO: Paste your code here
-        pass 
+    def _imputed_labeled(self):
+        df = self._prepared_df().copy()
+        num_cols = df.select_dtypes(include='number').columns
+        cat_cols = [c for c in df.select_dtypes(exclude='number').columns if c != 'label']
 
-    def Q2(self): # DO NOT modify this line
-        """
-        Problem 2:
-            return the tuple of numeric variables and categorical variables are presented in the dataset.
-        """
-        # TODO: Paste your code here
-        pass  
-    
-    def Q3(self): # DO NOT modify this line
-        """
-        Problem 3:
-            return the tuple of the Class 0 (no) followed by Class 1 (yes) in 3 digits.
-        """
-        # TODO: Paste your code here
-        pass 
-      
-    
+        for col in num_cols:
+            df[col] = df[col].fillna(df[col].mean())
+        for col in cat_cols:
+            df[col] = df[col].fillna(df[col].mode()[0])
 
-    def Q4(self): # DO NOT modify this line
-        """
-        Problem 4:
-            Remove duplicate records from the data. What are the shape of the dataset afterward?
-        """
-        # TODO: Paste your code here
-        
-        pass  
-        
+        y = df['label'].map({'p': 0, 'e': 1})
+        X = df.drop(columns=['label'])
+        return X, y
 
-    def Q5(self): # DO NOT modify this line
+    def _split_encoded(self):
+        X, y = self._imputed_labeled()
+        X = pd.get_dummies(X, drop_first=True)
+        return train_test_split(
+            X, y, test_size=0.2, random_state=2020, stratify=y
+        )
+
+    def _grid_search(self):
+        X_train, X_test, y_train, y_test = self._split_encoded()
+        param_grid = {
+            'criterion': ['gini', 'entropy'],
+            'max_depth': [2, 3],
+            'min_samples_leaf': [2, 5],
+            'n_estimators': [100],
+            'random_state': [2020],
+        }
+        gs = GridSearchCV(
+            RandomForestClassifier(),
+            param_grid,
+            cv=5,
+            n_jobs=-1,
+            scoring='f1_weighted',
+        )
+        gs.fit(X_train, y_train)
+        return gs, X_test, y_test
+
+    def Q1(self):  
         """
-        Problem 5:
-            5. Replace unknown value with null
-            6. Remove features with more than 99% flat values. 
-                Hint: There is only one feature should be drop
-            7. Split Data
-            -	Split the dataset into training and testing sets with a 70:30 ratio.
-            -	random_state=0
-            -	stratify option
-            return the tuple of shapes of X_train and X_test.
-
+            1. (From step 1) Before doing the data prep., how many "na" are there in "gill-size" variables?
         """
-        # TODO: Paste your code here
-       
-        pass  
+        return int(self.df['gill-size'].isna().sum())
 
-       
-    def Q6(self): 
+    def Q2(self):  
         """
-        Problem 6: 
-            8. Impute missing
-                -	For numeric variables: Impute missing values using the mean.
-                -	For categorical variables: Impute missing values using the mode.
-                Hint: Use statistics calculated from the training dataset to avoid data leakage.
-            9. Categorical Encoder:
-                Map the nominal data for the education variable using the following order:
-                education_order = {
-                    'illiterate': 1,
-                    'basic.4y': 2,
-                    'basic.6y': 3,
-                    'basic.9y': 4,
-                    'high.school': 5,
-                    'professional.course': 6,
-                    'university.degree': 7} 
-                Hint: Use One hot encoder or pd.dummy to encode nominal category
-            return the shape of X_train.
-
+            2. (From step 2-4) How many rows of data, how many variables?
         """
-        # TODO: Paste your code here
-        
-        pass  
-    
-    def Q7(self):
-        ''' Problem7: Use Logistic Regression as the model with 
-            random_state=2025, 
-            class_weight='balanced' and 
-            max_iter=500. 
-            Train the model using all the remaining available variables. 
-            What is the macro F1 score of the model on the test data? in 3 digits
-        '''
-        # TODO: Paste your code here
-        
-        pass  
-        
+        df = self._prepared_df()
+        return df.shape[0], df.shape[1]
 
+    def Q3(self):  
+        """
+            3. (From step 5-6) Answer the quantity class0:class1
+        """
+        _, y = self._imputed_labeled()
+        return int((y == 0).sum()), int((y == 1).sum())
 
-   
+    def Q4(self):  
+        """
+            4. (From step 7-8) How much is each training and testing sets
+        """
+        X_train, X_test, _, _ = self._split_encoded()
+        return X_train.shape, X_test.shape
+
+    def Q5(self):
+        """
+            5. (From step 9) Best params after doing random forest grid search.
+        """
+        gs, _, _ = self._grid_search()
+        p = gs.best_params_
+        return (
+            p['criterion'],
+            p['max_depth'],
+            p['min_samples_leaf'],
+            p['n_estimators'],
+            p['random_state'],
+        )
+
+    def Q6(self):
+        """
+            6. (From step 10) F1-score of class 0 and 1 from classification_report (2 digits).
+        """
+        gs, X_test, y_test = self._grid_search()
+        pred = gs.predict(X_test)
+        report = classification_report(y_test, pred, output_dict=True)
+        return (
+            round(report['0']['f1-score'], 2),
+            round(report['1']['f1-score'], 2),
+        )

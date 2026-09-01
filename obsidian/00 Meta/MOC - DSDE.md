@@ -23,6 +23,7 @@ cssclasses:
 | 1.2 | (ยังไม่ย้าย) YouTube EDA | — |
 | 2 | [[Week02 Titanic Data Prep]] | done |
 | 3 | [[Week03 Decision Tree Ensembles]] | done |
+| 4 | [[Week04 Logistic Regression and Random Forest]] | done |
 
 ## Concepts (Data Prep)
 
@@ -36,6 +37,7 @@ cssclasses:
 ## Concepts (ML)
 
 - [[Macro-F1]]
+- [[GridSearchCV]]
 
 ## Code deep-dives
 

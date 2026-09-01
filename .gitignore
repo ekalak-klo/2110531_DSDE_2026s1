@@ -1,3 +1,8 @@
 .DS_Store
+._*
 .ipynb_checkpoints/
 .python-version
+__pycache__/
+*.bak
+*.pandas_only.bak
+code/Week01_Intro_Pandas/data.tgz
