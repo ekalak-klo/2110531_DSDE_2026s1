@@ -32,17 +32,18 @@ answers:
   bank_q1: 41158
   bank_q3: [0.887, 0.113]
   bank_q4: [41146, 21]
-  bank_q5_train_test: [[28802, 20], [12344, 20]]
-  bank_q6_shape: [28802, 51]
-  bank_q7_macro_f1: 0.749
+  bank_q5_train_test: [[28802, 19], [12344, 19]]
+  bank_q6_shape: [28802, 49]
+  bank_q7_macro_f1: 0.75
 ---
 
 # Week 4 — Mushroom RF (4.1) + Bank Logistic (4.2)
 
 > [!abstract] งาน
-> สองชิ้นใน `attachment_week4/` — **4.1** Random Forest + GridSearch บน mushroom, **4.2** Logistic Regression บน bank marketing
+> สองชิ้นใน `attachment_week4/` — **4.2 อิง [[Lecture 03-04 Regression]]** (Logistic + Non-numeric) — **4.1** Random Forest + GridSearch บน mushroom, **4.2** Logistic Regression บน bank marketing
 
-**ส่ง:** `4.1/student.ipynb` + `4.2/student.py`  
+**โจทย์:** `homework/attachment_week4/problems/` (PDF + template)  
+**ส่ง:** `4.1/student.py` + `4.2/student.py`  
 **Notebook สอน:** `homework/attachment_week4/walkthrough_week4.ipynb`
 
 ---
@@ -76,6 +77,9 @@ answers:
 ---
 
 ## 4.2 — Bank Marketing (`BankLogistic`)
+
+> [!tip] ทบทวนก่อนทำ
+> Slide: Logistic §58–80, Non-numeric §88–93 → [[Logistic Regression]] · [[Non-numeric variables]]
 
 | ขั้น | ทำอะไร |
 |------|--------|

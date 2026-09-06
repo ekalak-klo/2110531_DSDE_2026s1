@@ -29,7 +29,8 @@ answers:
 > [!abstract] งาน
 > จาก lab Decision Tree บน diabetes dataset → ลอง **Random Forest** และ **Gradient Boosting** โดย **manual tune hyperparameters** แล้วให้ **Macro-F1** สูงกว่า baseline
 
-**Notebook ส่ง:** `homework/attachment_week3/Decision_Tree_RF_GB_Submission.ipynb`  
+**โจทย์:** `homework/attachment_week3/problems/` (lab v4 + README)  
+**Notebook ส่ง:** `homework/attachment_week3/hw_week3_decision_tree_ekalak.ipynb`  
 **Notebook สอน:** `homework/attachment_week3/walkthrough_week3.ipynb`
 
 ---

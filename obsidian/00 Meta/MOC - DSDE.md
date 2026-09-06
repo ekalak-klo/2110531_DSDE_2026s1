@@ -25,6 +25,16 @@ cssclasses:
 | 3 | [[Week03 Decision Tree Ensembles]] | done |
 | 4 | [[Week04 Logistic Regression and Random Forest]] | done |
 
+## Concepts (Linear Algebra)
+
+- [[Subspace]]
+- [[Null space]]
+- [[Orthogonal complement]]
+- [[Projection least squares]]
+- [[Eigenvalues eigenvectors]]
+- [[PCA]]
+- [[SVD]]
+
 ## Concepts (Data Prep)
 
 - [[Missing values]]
@@ -36,8 +46,15 @@ cssclasses:
 
 ## Concepts (ML)
 
+- [[Linear Regression]]
+- [[Logistic Regression]]
+- [[Non-numeric variables]]
 - [[Macro-F1]]
 - [[GridSearchCV]]
+
+## Concepts (Deep Learning)
+
+- [[Neural network layer]]
 
 ## Code deep-dives
 
@@ -48,6 +65,9 @@ cssclasses:
 - [[DataPreparation_v10]]
 - [[Lab Week02 DataPrep]]
 - [[Lab Week03 Decision Trees]]
+- [[Lab Week03 Logistic Regression]]
+- [[Lab Week03 Linear Regression]]
+- [[Lecture 03-04 Regression]]
 
 ## Vault layout
 
