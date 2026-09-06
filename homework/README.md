@@ -15,6 +15,7 @@ attachment_weekN/
 | 2 | assignment notebook | `student.py` |
 | 3 | lab v4 (ไม่มี PDF) | `hw_week3_*.ipynb` |
 | 4 | PDF 4.1 + 4.2 | `4.1/student.py`, `4.2/student.py` |
+| 5 | PDF clustering + template | `student.py` |
 
 โน้ตเรียน / สรุปคำตอบ → `obsidian/02 Assignments/`
 

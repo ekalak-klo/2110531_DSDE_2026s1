@@ -24,6 +24,7 @@ cssclasses:
 | 2 | [[Week02 Titanic Data Prep]] | done |
 | 3 | [[Week03 Decision Tree Ensembles]] | done |
 | 4 | [[Week04 Logistic Regression and Random Forest]] | done |
+| 5 | [[Week05 K-Means Clustering]] | done |
 
 ## Concepts (Linear Algebra)
 
@@ -51,6 +52,7 @@ cssclasses:
 - [[Non-numeric variables]]
 - [[Macro-F1]]
 - [[GridSearchCV]]
+- [[K-Means]]
 
 ## Concepts (Deep Learning)
 
